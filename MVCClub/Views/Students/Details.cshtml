@@ -1,0 +1,85 @@
+﻿@model MVCClub.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Details of Student @Html.DisplayFor(model => model.FirstName)  @Html.DisplayFor(model => model.LastName)</h3>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+
+    </dl>
+</div>
+<br />
+<br />
+
+<div>
+    <h3>Details of Membership </h3>
+
+   <table  border="1">
+       <tr>
+           <td><h5><b>Club</b></h5></td>
+           <td><h5><b>Open Date</b></h5></td>
+           <td><h5>           <b>Location</b></h5></td>
+       </tr>
+
+       <tr>
+           <td>
+               <h5>@ViewBag.ClubDetail.club</h5>
+           </td>
+           <td>
+               <h5> @ViewBag.ClubDetail.OpenDate</h5>
+           </td>
+
+           <td>
+               <h5> @ViewBag.ClubDetail.Location</h5>
+           </td>
+       </tr>
+   </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

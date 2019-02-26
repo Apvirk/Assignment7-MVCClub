@@ -1,0 +1,82 @@
+﻿@model MVCClub.President
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h3>Detail of President @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Club.ClubName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Club.ClubName)
+        </dd>*@
+
+    </dl>
+</div>
+<hr />
+<div>
+    <h3>Assigned Clubs </h3>
+
+    <table border="1">
+        <tr>
+            <td><h5><b>Club</b></h5></td>
+            <td><h5><b>Open Date</b></h5></td>
+            <td><h5>           <b>Location</b></h5></td>
+            <td><h5>           <b>No of Member</b></h5></td>
+        </tr>
+        @foreach (MVCClub.Models.MemberDetails oMemberDetails in @ViewBag.ClubDetail)
+        {
+        <tr>
+            <td>
+                <h5>@oMemberDetails.club</h5>
+            </td>
+            <td>
+                <h5> @oMemberDetails.OpenDate</h5>
+            </td>
+
+            <td>
+                <h5> @oMemberDetails.Location</h5>
+            </td>
+
+            <td>
+                <h5> @oMemberDetails.NoofMember</h5>
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PresidentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

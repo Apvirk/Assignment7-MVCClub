@@ -1,0 +1,58 @@
+﻿@model MVCClub.MemberShip
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MemberShip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClubID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClubID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Club.ClubName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Club.ClubName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.LastName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MembershipID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

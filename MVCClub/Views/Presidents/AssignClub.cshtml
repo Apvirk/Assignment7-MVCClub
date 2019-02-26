@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "AssignClub";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h2>AssignClub Club to President </h2>
+
+    <form action="/Presidents/GetAssignLoc"  method="post">
+
+       
+        <h4>Selelct Club(s) to assign to the president <label for="PresidentName" >@ViewBag.Pname</label> </h4>
+        
+        <input type="hidden" name ="sid" id="sid" value=@ViewBag.Pid />
+  
+        <br />
+        @*<ul>
+                @foreach (String clubname in ViewBag.clist)
+                {
+                    <li>
+                        @clubname
+                    </li>
+
+                }
+            </ul>*@
+
+        @Html.ListBox("SportsList", new SelectList(ViewBag.clist), new { id = "SportsList" })
+
+        <br />
+        <input type="submit" value="Save" />
+    </form>
+</body>
+</html>

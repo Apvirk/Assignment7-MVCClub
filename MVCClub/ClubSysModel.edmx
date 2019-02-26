@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CLUBDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Center">
+          <Key>
+            <PropertyRef Name="ClubID" />
+          </Key>
+          <Property Name="ClubID" Type="int" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubID" />
+          </Key>
+          <Property Name="ClubID" Type="int" Nullable="false" />
+          <Property Name="ClubName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpenDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MemberShip">
+          <Key>
+            <PropertyRef Name="MembershipID" />
+          </Key>
+          <Property Name="MembershipID" Type="int" Nullable="false" />
+          <Property Name="ClubID" Type="int" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="ExpireDate" Type="datetime" />
+          <Property Name="RegistrationFee" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="President">
+          <Key>
+            <PropertyRef Name="PresidentID" />
+          </Key>
+          <Property Name="PresidentID" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegistrationDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Center_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Center" Type="Self.Center" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Center">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberShip_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="MemberShip" Type="Self.MemberShip" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="MemberShip">
+              <PropertyRef Name="MembershipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberShip_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="MemberShip" Type="Self.MemberShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="MemberShip">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_President_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="President" Type="Self.President" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="President">
+              <PropertyRef Name="PresidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CLUBDBModelStoreContainer">
+          <EntitySet Name="Center" EntityType="Self.Center" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberShip" EntityType="Self.MemberShip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="President" EntityType="Self.President" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Center_Club" Association="Self.FK_Center_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Center" EntitySet="Center" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberShip_Club" Association="Self.FK_MemberShip_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="MemberShip" EntitySet="MemberShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberShip_Student" Association="Self.FK_MemberShip_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="MemberShip" EntitySet="MemberShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_President_Club" Association="Self.FK_President_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="President" EntitySet="President" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CLUBDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubID" />
+          </Key>
+          <Property Name="ClubID" Type="Int32" Nullable="false" />
+          <Property Name="ClubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpenDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MemberShip" Relationship="Self.FK_MemberShip_Club" FromRole="Club" ToRole="MemberShip" />
+          <NavigationProperty Name="President" Relationship="Self.FK_President_Club" FromRole="Club" ToRole="President" />
+          <NavigationProperty Name="Center" Relationship="CLUBDBModel.FK_Center_Club" FromRole="Club" ToRole="Center" />
+        </EntityType>
+        <EntityType Name="MemberShip">
+          <Key>
+            <PropertyRef Name="MembershipID" />
+          </Key>
+          <Property Name="MembershipID" Type="Int32" Nullable="false" />
+          <Property Name="ClubID" Type="Int32" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="ExpireDate" Type="DateTime" Precision="3" />
+          <Property Name="RegistrationFee" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_MemberShip_Club" FromRole="MemberShip" ToRole="Club" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_MemberShip_Student" FromRole="MemberShip" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="President">
+          <Key>
+            <PropertyRef Name="PresidentID" />
+          </Key>
+          <Property Name="PresidentID" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_President_Club" FromRole="President" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MemberShips" Relationship="Self.FK_MemberShip_Student" FromRole="Student" ToRole="MemberShip" />
+        </EntityType>
+        <Association Name="FK_MemberShip_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="MemberShip" Type="Self.MemberShip" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="MemberShip">
+              <PropertyRef Name="MembershipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_President_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="President" Type="Self.President" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="President">
+              <PropertyRef Name="PresidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberShip_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="MemberShip" Type="Self.MemberShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="MemberShip">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CLUBDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clubs" EntityType="Self.Club" />
+          <EntitySet Name="MemberShips" EntityType="Self.MemberShip" />
+          <EntitySet Name="Presidents" EntityType="Self.President" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK_MemberShip_Club" Association="Self.FK_MemberShip_Club">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="MemberShip" EntitySet="MemberShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_President_Club" Association="Self.FK_President_Club">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="President" EntitySet="Presidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberShip_Student" Association="Self.FK_MemberShip_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="MemberShip" EntitySet="MemberShips" />
+          </AssociationSet>
+          <EntitySet Name="Centers" EntityType="CLUBDBModel.Center" />
+          <AssociationSet Name="FK_Center_Club" Association="CLUBDBModel.FK_Center_Club">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Center" EntitySet="Centers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Center">
+          <Key>
+            <PropertyRef Name="ClubID" />
+          </Key>
+          <Property Name="ClubID" Type="Int32" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Club" Relationship="CLUBDBModel.FK_Center_Club" FromRole="Center" ToRole="Club" />
+        </EntityType>
+        <Association Name="FK_Center_Club">
+          <End Type="CLUBDBModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="CLUBDBModel.Center" Role="Center" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Center">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CLUBDBModelStoreContainer" CdmEntityContainer="CLUBDBEntities">
+          <EntitySetMapping Name="Clubs">
+            <EntityTypeMapping TypeName="CLUBDBModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="OpenDate" ColumnName="OpenDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberShips">
+            <EntityTypeMapping TypeName="CLUBDBModel.MemberShip">
+              <MappingFragment StoreEntitySet="MemberShip">
+                <ScalarProperty Name="MembershipID" ColumnName="MembershipID" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="RegistrationFee" ColumnName="RegistrationFee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presidents">
+            <EntityTypeMapping TypeName="CLUBDBModel.President">
+              <MappingFragment StoreEntitySet="President">
+                <ScalarProperty Name="PresidentID" ColumnName="PresidentID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="CLUBDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Centers">
+            <EntityTypeMapping TypeName="CLUBDBModel.Center">
+              <MappingFragment StoreEntitySet="Center">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

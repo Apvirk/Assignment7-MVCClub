@@ -1,0 +1,113 @@
+﻿@model MVCClub.Club
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2></h2>
+
+<div>
+    <h4>Club Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClubName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClubName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpenDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpenDate)
+        </dd>
+
+      
+        <dt>
+            @Html.DisplayNameFor(model => model.Center.Location)
+        </dt>
+
+        <dd>@*<dt>
+        @Html.DisplayNameFor(model => model.MemberShip.MembershipID)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.MemberShip.MembershipID)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.President.LastName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.President.LastName)
+    </dd>*@
+
+
+            @Html.DisplayFor(model => model.Center.Location)
+        </dd>
+
+    </dl>
+</div>
+</br>
+
+<div>
+    <h3>Student Member </h3>
+
+    <table border="1">
+        <tr>
+            <td><h5><b>FirstName</b></h5></td>
+            <td><h5><b>LastName</b></h5></td>
+            <td><h5>           <b>Registration Date</b></h5></td>
+        </tr>
+
+        <tr>
+            <td>
+                <h5>@ViewBag.SDetails.FirstName</h5>
+            </td>
+            <td>
+                <h5> @ViewBag.SDetails.LastName</h5>
+            </td>
+
+            <td>
+                <h5> @ViewBag.SDetails.RegistrationDate</h5>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div>
+    <h3>Club Presidents </h3>
+
+    <table border="1">
+        <tr>
+            <td><h5><b>FirstName</b></h5></td>
+            <td><h5><b>LastName</b></h5></td>
+           
+        </tr>
+@foreach (MVCClub.Models.PresidentDetails oPresidentDetails in @ViewBag.lstPresidentDetails)
+{
+        <tr>
+            <td>
+                <h5>@oPresidentDetails.FirstName</h5>
+            </td>
+            <td>
+                <h5> @oPresidentDetails.LastName</h5>
+            </td>
+
+           
+        </tr>
+}
+    </table>
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ClubID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

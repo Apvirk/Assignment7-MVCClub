@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "GetAssignLoc";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h2>Center Assignment </h2>
+
+    <form action="/Presidents/AssigPresident/"  method="post">
+
+
+        <input type="hidden" name="Prdid" id="Prdid" value=@ViewBag.Prdid />
+        <br />
+        <input placeholder="SportsList here" type="hidden" id="SportsList" name="SportsList"  value=@ViewBag.ClubNames>
+        <br />
+        <h4>Assign Location for Center <label for="ClubNames">@ViewBag.ClubNames</label> <br />
+<input placeholder="Location ID here" type="text" id="LocID" name="LocID"></h4>
+        
+
+        <br />
+        <input type="submit" value="Save" />
+    </form>
+</body>
+</html>

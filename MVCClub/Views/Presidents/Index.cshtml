@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MVCClub.President>
+
+
+
+@{
+    ViewBag.Title = "President";
+}
+
+<h2>President List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+
+            Assigned Club
+
+           
+
+          
+
+            @*model.Club.ClubName="Assigned Club";
+            
+           //model.Club.ClubName)*@
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Club.ClubName)*@
+          
+
+            <select size="3">
+                @foreach (string s in ViewBag.clist)
+                {
+
+                    string[] sid = s.Split('-');
+
+                    if (Convert.ToInt16(sid[0]) == item.PresidentID)
+                    {
+                        <option>@sid[1]</option>
+                    }
+
+                }
+            </select>
+
+           
+        </td>
+
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PresidentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PresidentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PresidentID })
+            @Html.ActionLink("AssignClub", "AssignClub", new { id = item.PresidentID })
+        </td>
+    </tr>
+}
+
+</table>
